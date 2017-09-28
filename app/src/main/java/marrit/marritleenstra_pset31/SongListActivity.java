@@ -44,6 +44,8 @@ public class SongListActivity extends ListActivity {
 
         ListView lv = getListView();
 
+        lv.setOnItemClickListener(new MyActivityListener());
+
     }
 }
 
