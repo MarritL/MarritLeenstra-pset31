@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
+import java.util.UUID;
+
 
 public class SongActivity extends AppCompatActivity {
 
@@ -18,26 +20,25 @@ public class SongActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_song);
 
-        mSong = new Song();
+        UUID songId = (UUID) getIntent().getSerializableExtra("SONG_ID");
+        // mSong = new Song;
+        mSong = SongLab.getSong(songId);
+
 
         mSongTitle = (TextView) findViewById(R.id.song_title);
-        // TODO get songTitle
-        mSong.setTitle("testTitle");
+        mSong.setTitle(mSong.getTitle());
         mSongTitle.setText(mSong.getTitle());
 
         mSongArtist = (TextView) findViewById(R.id.song_artist);
-        // TODO get songArtist
-        mSong.setArtist("testArtist");
+        mSong.setArtist(mSong.getArtist());
         mSongArtist.setText(mSong.getArtist());
 
         mSongAlbum = (TextView) findViewById(R.id.song_album);
-        // TODO get songArtist
-        mSong.setAlbum("testAlbum");
+        mSong.setAlbum(mSong.getAlbum());
         mSongAlbum.setText(mSong.getAlbum());
 
         mSongGenre = (TextView) findViewById(R.id.song_genre);
-        // TODO get songArtist
-        mSong.setGenre("testGenre");
+        mSong.setGenre(mSong.getGenre());
         mSongGenre.setText(mSong.getGenre());
     }
 }

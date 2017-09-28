@@ -16,7 +16,7 @@ import java.util.UUID;
 public class SongLab {
     private static SongLab sSongLab;
 
-    private ArrayList<Song> mSongs;
+    private static ArrayList<Song> mSongs;
 
     public static SongLab get(Context context) {
         if (sSongLab == null) {
@@ -42,9 +42,9 @@ public class SongLab {
         return mSongs;
     }
 
-    public Song getSong(UUID id) {
+    public static Song getSong(UUID id) {
         for (Song song : mSongs) {
-            if (song.getId().equals(id)) {
+            if (song.getID().equals(id)) {
                 return song;
             }
         }

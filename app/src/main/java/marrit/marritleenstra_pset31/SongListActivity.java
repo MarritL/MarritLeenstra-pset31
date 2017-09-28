@@ -2,6 +2,8 @@ package marrit.marritleenstra_pset31;
 
 import android.app.Activity;
 import android.app.ListActivity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.widget.ListView;
@@ -9,6 +11,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 
 /**
@@ -21,6 +24,9 @@ public class SongListActivity extends ListActivity {
     // declare variables
     private ArrayList<Song> mSongs = new ArrayList<Song>();
     private SongAdapter mAdapter;
+
+    // add static strings for key-value pairs
+    public static final String EXTRA_SONG_ID = "marrit.marritleenstra_pset31.SongId";
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +52,12 @@ public class SongListActivity extends ListActivity {
 
         lv.setOnItemClickListener(new MyActivityListener());
 
+    }
+
+    public static Intent newIntent(Context packageContext, UUID mId) {
+        Intent intent = new Intent(packageContext, SongActivity.class);
+        intent.putExtra(EXTRA_SONG_ID, mId);
+        return intent;
     }
 }
 

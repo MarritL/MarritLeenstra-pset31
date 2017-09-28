@@ -24,7 +24,7 @@ public class Song {
     }
 
     // getters and setters for all fields
-    public UUID getId() {
+    public UUID getID() {
         return mId;
     }
 
