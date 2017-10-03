@@ -18,7 +18,7 @@ public class HttpRequestHelper {
         String chosenTag = parems[0];
 
         // creeer een geldinge url met je API en de gegeven zoekterm van de gebruiker
-        String urlString = "/2.0/?method=track.search&track=Believe&api_key=efe24c656585a96dea7a7e3ea770f3ab&format=json";
+        String urlString = "http://ws.audioscrobbler.com/2.0/" + "?method=track.search&track=" + chosenTag + "&api_key=" + "efe24c656585a96dea7a7e3ea770f3ab"+ "&format=json";
 
         //maak van je url een URL object
         URL url = null;

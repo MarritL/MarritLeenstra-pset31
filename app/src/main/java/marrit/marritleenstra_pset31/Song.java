@@ -1,6 +1,7 @@
 package marrit.marritleenstra_pset31;
 
 
+import java.io.Serializable;
 import java.util.UUID;
 
 /**
@@ -8,7 +9,7 @@ import java.util.UUID;
  * Class that holds all the information about a song.
  */
 
-public class Song {
+public class Song implements Serializable {
 
 
     private UUID mId;
@@ -16,6 +17,16 @@ public class Song {
     private String mArtist;
     private String mAlbum;
     private String mGenre;
+
+    {
+        //instrance initializer; runs before any constructor
+        mId = null;
+        mTitle = "";
+        mArtist = "";
+        mAlbum = "";
+        mGenre = "";
+
+    }
 
 
     // initiate instance of Class with Id

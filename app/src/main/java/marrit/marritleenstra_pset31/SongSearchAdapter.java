@@ -37,7 +37,7 @@ public class SongSearchAdapter extends ArrayAdapter<Song> {
         // check to see if the view is null and need to be inflated
         if (v == null) {
             LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            v = inflater.inflate(R.layout.list_item, null);
+            v = inflater.inflate(R.layout.searched_list_item, null);
         }
 
         // iterate through the list
@@ -46,8 +46,8 @@ public class SongSearchAdapter extends ArrayAdapter<Song> {
         if (i != null) {
 
             // initiate the TextViews
-            mTitle = (TextView) v.findViewById(R.id.song_title2);
-            mArtist = (TextView) v.findViewById(R.id.song_artist2);
+            mTitle = (TextView) v.findViewById(R.id.song_title3);
+            mArtist = (TextView) v.findViewById(R.id.song_artist3);
 
             // if TextView is not null, set text according to Song i
             if (mTitle != null) {

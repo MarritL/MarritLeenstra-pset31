@@ -3,6 +3,7 @@ package marrit.marritleenstra_pset31;
 import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -11,6 +12,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import static android.content.ContentValues.TAG;
+
 /**
  * Created by Marrit on 2-10-2017.
  */
@@ -18,6 +21,8 @@ import java.util.ArrayList;
 public class TrackAsyncTask extends AsyncTask<String, Integer, String> {
     private Context mContext;
     private SearchActivity mSearchActivity;
+
+    private static final String TAG = "ERRORTAG";
 
     public TrackAsyncTask(SearchActivity act) {
         this.mSearchActivity = act;
@@ -33,13 +38,16 @@ public class TrackAsyncTask extends AsyncTask<String, Integer, String> {
     // the AsyncTask = search in last.fm database
     @Override
     protected String doInBackground(String... params) {
+        Log.d(TAG, "called doInBackground");
         return HttpRequestHelper.downloadFromServer(params);
+
     }
 
     // return the result
     @Override
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
+        Log.d(TAG, "called onPostExecute");
         ArrayList<Song> mSongsList = new ArrayList<>();
 
         try {
@@ -52,9 +60,10 @@ public class TrackAsyncTask extends AsyncTask<String, Integer, String> {
                 Song song = new Song();
                 song.setTitle(track.getString("name"));
                 song.setArtist(track.getString("artist"));
-                song.setAlbum(track.getString("album"));
-                song.setGenre(track.getString("genre"));
+                //song.setAlbum(track.getString("album"));
+                //song.setGenre(track.getString("genre"));
                 mSongsList.add(song);
+                Log.d(TAG, "after mSongsList.add");
             }
 
 
@@ -64,7 +73,9 @@ public class TrackAsyncTask extends AsyncTask<String, Integer, String> {
         }
 
         // als je de gevonden data hebt naar volgende activiteit
+        Log.d(TAG, "before trackStartIntent");
         this.mSearchActivity.trackStartIntent(mSongsList);
+        Log.d(TAG, "after trackStartIntent");
     }
 
 }

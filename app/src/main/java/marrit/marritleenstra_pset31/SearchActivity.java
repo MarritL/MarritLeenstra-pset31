@@ -55,9 +55,13 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     public void trackStartIntent(ArrayList<Song> songs) {
+        Log.d(TAG, "called trackStartIntent");
         Intent intent = new Intent(this, SearchListActivity.class);
+        Log.d(TAG, "created new intent");
         intent.putExtra("data", songs);
+        Log.d(TAG, "added extras");
         this.startActivity(intent);
+        Log.d(TAG, "finished");
     }
 
     private class onButtonClickListener implements View.OnClickListener {
