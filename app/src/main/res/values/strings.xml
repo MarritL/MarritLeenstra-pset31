@@ -4,4 +4,9 @@
     <string name="artist">Artist</string>
     <string name="album">Album</string>
     <string name="genre">Genre</string>
+    <string name="empty_list">There\'s nothing in your \" To listen list \" yet</string>
+    <string name="add_song">Add Song</string>
+    <string name="search_artist">Search artist</string>
+    <string name="search_track">Search track</string>
+    <string name="search">Search</string>
 </resources>

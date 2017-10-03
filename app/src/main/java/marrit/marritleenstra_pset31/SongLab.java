@@ -29,13 +29,15 @@ public class SongLab {
     private SongLab(Context context) {
         mSongs = new ArrayList<>();
 
-        //populate list for testing purposes
+        /*//populate list for testing purposes
         for (int i = 0; i <100; i++) {
             Song song = new Song();
             song.setTitle("Song #"+i);
             song.setArtist("Artist #"+i);
+            song.setAlbum("Album #"+i);
+            song.setGenre("Genre #" +i);
             mSongs.add(song);
-        }
+        }*/
     }
 
     public ArrayList<Song> getSongs() {
@@ -49,6 +51,14 @@ public class SongLab {
             }
         }
         return null;
+    }
+
+    public void addSong(Song s) {
+        s.setTitle("Song #");
+        s.setArtist("Artist #");
+        s.setAlbum("Album #");
+        s.setGenre("Genre #" );
+        mSongs.add(s);
     }
 
 }

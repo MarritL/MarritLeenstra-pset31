@@ -10,28 +10,22 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 /**
- * Created by Marrit on 27-9-2017.
- * Adapter to create a list of Songs.
- *
- * Inspired by https://devtut.wordpress.com/2011/06/09/custom-arrayadapter-for-a-listview-android/
- * and Phillips, Stewart, Marsicano (2017). Android Programming. The big nerd ranch guide.
- * 3th edition.
+ * Created by Marrit on 2-10-2017.
  */
 
-public class SongAdapter extends ArrayAdapter<Song> {
+public class SongSearchAdapter extends ArrayAdapter<Song> {
 
-    // declaring an arraylist of Songs
-    private ArrayList<Song> mSongs;
+    // declaring an ArrayList of Songs
     private ArrayList<Song> mSearchedSongs;
 
-    // declare textviews
+    // declare TextViews
     public TextView mTitle;
     public TextView mArtist;
 
     // construct an adapter for the To Listen List
-    public SongAdapter(Context context, int textViewResourceId, ArrayList<Song> mSongs) {
-        super(context, textViewResourceId, mSongs);
-        this.mSongs = mSongs;
+    public SongSearchAdapter(Context context, int textViewResourceId, ArrayList<Song> songs) {
+        super(context, textViewResourceId, songs);
+        this.mSearchedSongs = songs;
     }
 
     // create the view for the list
@@ -46,8 +40,8 @@ public class SongAdapter extends ArrayAdapter<Song> {
             v = inflater.inflate(R.layout.list_item, null);
         }
 
-		// iterate through the list
-        Song i = mSongs.get(position);
+        // iterate through the list
+        Song i = mSearchedSongs.get(position);
 
         if (i != null) {
 
@@ -67,3 +61,5 @@ public class SongAdapter extends ArrayAdapter<Song> {
         return v;
     }
 }
+
+
