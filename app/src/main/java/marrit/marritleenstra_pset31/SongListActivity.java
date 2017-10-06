@@ -33,6 +33,7 @@ public class SongListActivity extends ListActivity {
 
     // add static strings for key-value pairs
     public static final String EXTRA_SONG_ID = "marrit.marritleenstra_pset31.SongId";
+    public static final String SOURCEACT = "marrit.marritleenstra_pset31.SourceActivity";
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,11 +62,14 @@ public class SongListActivity extends ListActivity {
 
     }
 
-    public static Intent newIntent(Context packageContext, UUID mId) {
+    /*public static Intent newIntent(Context packageContext, UUID mId) {
         Intent intent = new Intent(packageContext, SongActivity.class);
-        intent.putExtra(EXTRA_SONG_ID, mId);
+        Bundle extras = new Bundle();
+        extras.putSerializable(EXTRA_SONG_ID, mId);
+        extras.putString(SOURCEACT, "SongListActivity");
+        intent.putExtras(extras);
         return intent;
-    }
+    }*/
 
     // inflate menu
     @Override

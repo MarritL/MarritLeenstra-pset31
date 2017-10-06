@@ -9,4 +9,6 @@
     <string name="search_artist">Search artist</string>
     <string name="search_track">Search track</string>
     <string name="search">Search</string>
+    <string name="add_song_to_list">Add Song to Listen List</string>
+    <string name="delete_from_list">Delete Song from Listen List</string>
 </resources>

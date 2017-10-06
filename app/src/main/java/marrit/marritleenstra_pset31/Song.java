@@ -19,13 +19,12 @@ public class Song implements Serializable {
     private String mGenre;
 
     {
-        //instrance initializer; runs before any constructor
+        //instance initializer; runs before any constructor
         mId = null;
         mTitle = "";
         mArtist = "";
         mAlbum = "";
         mGenre = "";
-
     }
 
 

@@ -53,11 +53,11 @@ public class SongLab {
         return null;
     }
 
-    public void addSong(Song s) {
-        s.setTitle("Song #");
-        s.setArtist("Artist #");
-        s.setAlbum("Album #");
-        s.setGenre("Genre #" );
+    public static void addSong(Song s) {
+        s.setTitle(s.getTitle());
+        s.setArtist(s.getArtist());
+        s.setAlbum(s.getAlbum());
+        s.setGenre(s.getGenre());
         mSongs.add(s);
     }
 

@@ -1,10 +1,13 @@
 package marrit.marritleenstra_pset31;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 
 import java.util.UUID;
+
+import static marrit.marritleenstra_pset31.SongListActivity.SOURCEACT;
 
 /**
  * Created by Marrit on 28-9-2017.
@@ -19,7 +22,11 @@ public class MyActivityListener implements AdapterView.OnItemClickListener {
         UUID mId = song.getID();
         //Intent intent = SongListActivity.newIntent(SongListActivity, SongListActivity.i.getId());
         Intent intent = new Intent(view.getContext(), SongActivity.class);
-        intent.putExtra("SONG_ID", mId);
+        Bundle extras = new Bundle();
+        extras.putSerializable("SONG_ID", mId);
+        extras.putString(SOURCEACT, "SongListActivity");
+        intent.putExtras(extras);
+
         view.getContext().startActivity(intent);
     }
 }

@@ -18,7 +18,6 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:textColor="@color/colorPrimaryDark"
         tools:text= "Believe" />
 
     <TextView
@@ -33,10 +32,10 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:textColor="@color/colorPrimaryDark"
         tools:text= "Cher" />
 
     <TextView
+        android:id="@+id/TV_song_album"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text= "@string/album"
@@ -48,10 +47,10 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:textColor="@color/colorPrimaryDark"
         tools:text= "Album name" />
 
     <TextView
+        android:id="@+id/TV_song_genre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text= "@string/genre"
@@ -63,8 +62,20 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:textColor="@color/colorPrimaryDark"
         tools:text= "Pop" />
+
+    <Button
+        android:id="@+id/button_add_to_List"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:text="@string/add_song_to_list"/>
+
+    <Button
+        android:id="@+id/button_delete_from_List"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/delete_from_list"/>
 
 
 </LinearLayout>
