@@ -21,6 +21,7 @@ public class SearchActivity extends AppCompatActivity {
     Button mSearchArtistButton;
     Button mSearchTrackButton;
 
+
     private static final String TAG = "ERRORTAG";
 
     @Override
@@ -41,6 +42,7 @@ public class SearchActivity extends AppCompatActivity {
 
         //handle click
         mSearchTrackButton.setOnClickListener(new onButtonClickListener());
+        mSearchArtistButton.setOnClickListener(new onButtonClickListener());
 
     }
 
@@ -48,10 +50,18 @@ public class SearchActivity extends AppCompatActivity {
         String trackSearch = mSearchTrack.getText().toString();
         TrackAsyncTask asyncTask = new TrackAsyncTask(this);
         Log.d(TAG, "calling asyncTask.execute()");
-        asyncTask.execute(trackSearch);
+        asyncTask.execute(trackSearch, "track.search&track=");
         Log.d(TAG, "after asyncTask.execute(trackSearch)");
 
         mSearchTrack.getText().clear();
+    }
+
+    public void artistSearch(View view) {
+        String artistSearch = mSearchArtist.getText().toString();
+        TrackAsyncTask asyncTask = new TrackAsyncTask(this);
+        Log.d(TAG, "calling asyncTask from artistSearch");
+        asyncTask.execute(artistSearch, "artist.search&artist=");
+        Log.d(TAG, "after asyincTask.execute(artistSearch");
     }
 
     public void trackStartIntent(ArrayList<Song> songs) {
@@ -73,7 +83,8 @@ public class SearchActivity extends AppCompatActivity {
                 Log.d(TAG,"after trackSearch(View)");
             }
             else {
-
+                artistSearch(view);
+                Log.d(TAG,"after artistSearch(View)");
             }
         }
 

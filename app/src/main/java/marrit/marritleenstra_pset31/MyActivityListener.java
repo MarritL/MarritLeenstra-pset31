@@ -24,7 +24,7 @@ public class MyActivityListener implements AdapterView.OnItemClickListener {
         Intent intent = new Intent(view.getContext(), SongActivity.class);
         Bundle extras = new Bundle();
         extras.putSerializable("SONG_ID", mId);
-        extras.putString(SOURCEACT, "SongListActivity");
+        extras.putString("SOURCEACT", "SongListActivity");
         intent.putExtras(extras);
 
         view.getContext().startActivity(intent);

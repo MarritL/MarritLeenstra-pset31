@@ -53,6 +53,7 @@ public class SongActivity extends AppCompatActivity {
         if (startingAct.equals("SongListActivity")) {
             UUID songId = (UUID) extras.getSerializable("SONG_ID");
             mSong = SongLab.getSong(songId);
+            mButtonAdd.setVisibility(View.INVISIBLE);
         }
         else if (startingAct.equals("SearchListActivity")) {
             mSong = new Song();
@@ -87,6 +88,7 @@ public class SongActivity extends AppCompatActivity {
 
         @Override
         public void onClick(View view) {
+            // TODO: get other info about song from server!
             SongLab.addSong(mSong);
             Intent intent = new Intent(view.getContext(), SongListActivity.class);
             view.getContext().startActivity(intent);
