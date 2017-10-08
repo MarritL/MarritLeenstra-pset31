@@ -16,7 +16,7 @@ public class Song implements Serializable {
     private String mTitle;
     private String mArtist;
     private String mAlbum;
-    private String mGenre;
+    private String mSummary;
 
     {
         //instance initializer; runs before any constructor
@@ -24,7 +24,7 @@ public class Song implements Serializable {
         mTitle = "";
         mArtist = "";
         mAlbum = "";
-        mGenre = "";
+        mSummary = "";
     }
 
 
@@ -62,11 +62,11 @@ public class Song implements Serializable {
         mAlbum = album;
     }
 
-    public String getGenre() {
-        return mGenre;
+    public String getSummary() {
+        return mSummary;
     }
 
-    public void setGenre(String genre) {
-        mGenre = genre;
+    public void setSummary(String summary) {
+        mSummary = summary;
     }
 }

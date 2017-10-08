@@ -63,31 +63,20 @@ public class TrackAsyncTask2 extends AsyncTask<String, Integer, String> {
             try {
                 JSONObject trackStreamobj = new JSONObject(result);
                 JSONObject track = trackStreamobj.getJSONObject("track");
-                //JSONObject resultsObj = trackStreamobj.getJSONObject("results");
-                //JSONObject trackmatchesObj = resultsObj.getJSONObject("trackmatches");
-                //JSONArray trackObj =  trackStreamobj.getJSONArray("track");
-                for (int i = 0; i < track.length(); i++) {
-                    //JSONObject track = trackObj.getJSONObject(i);
+
+                //for (int i = 0; i < track.length(); i++) {
+
                     Song song = new Song();
                     song.setTitle(track.getString("name"));
-                    //song.setAlbum(track.getString("album"));
+
                     JSONObject mArtist = track.getJSONObject("artist");
                     song.setArtist(mArtist.getString("name"));
 
                     JSONObject mAlbum = track.getJSONObject("album");
-                    //song.setAlbum(mAlbum.getString("name"));
-                    JSONObject toptagsobj = track.getJSONObject("wiki");
-                    /*//JSONArray tagsobj = toptagsobj.getJSONArray("tag");
-                    for (int j = 0; j < tagsobj.length(); j++) {
-                        JSONObject tag = tagsobj.getJSONObject(j);
-                        genre += tag.getString("name");
-                        genre += ", ";
-                    }
-                    Integer index = genre.lastIndexOf(",");
-                    genre = genre.substring(0, index-1);*/
+                    song.setAlbum(mAlbum.getString("title"));
+                    JSONObject wikiObj = track.getJSONObject("wiki");
 
-
-                    song.setGenre(toptagsobj.getString("summary"));
+                    song.setSummary(wikiObj.getString("summary"));
                     Log.d(TAG, "after add info to song");
 
                     Intent intent = new Intent(this.mSearchListActivity, SongActivity.class);
@@ -95,20 +84,20 @@ public class TrackAsyncTask2 extends AsyncTask<String, Integer, String> {
                     String mmTitle = song.getTitle();
                     String mmArtist = song.getArtist();
                     String mmAlbum = song.getAlbum();
-                    String mmGenre = song.getGenre();
+                    String mmSummary = song.getSummary();
 
                     Bundle extras = new Bundle();
                     extras.putSerializable("SONG_ID", mmId);
                     extras.putString("TITLE", mmTitle);
                     extras.putString("ARTIST", mmArtist);
                     extras.putString("ALBUM", mmAlbum);
-                    extras.putString("GENRE", mmGenre);
+                    extras.putString("SUMMARY", mmSummary);
                     extras.putString("SOURCEACT", "SearchListActivity");
                     intent.putExtras(extras);
+                    Log.d(TAG, "starting from TrackAsyncTask2");
+                    this.mSearchListActivity.startActivityForResult(intent, 0);
 
-                    this.mSearchListActivity.startActivity(intent);
-
-                }
+                //}
 
             } catch (JSONException e) {
                 e.printStackTrace();

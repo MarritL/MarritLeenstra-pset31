@@ -1,81 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:layout_margin="16dp"
-              tools:context=".SongActivity">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text= "@string/title"/>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  xmlns:tools="http://schemas.android.com/tools"
+                  android:orientation="vertical"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:layout_margin="16dp"
+                  tools:context=".SongActivity">
 
-    <TextView
-        android:id="@+id/song_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        tools:text= "Believe" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text= "@string/title"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text= "@string/artist"
-        android:layout_marginTop="20dp"/>
+        <TextView
+            android:id="@+id/song_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:text= "Believe" />
 
-    <TextView
-        android:id="@+id/song_artist"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        tools:text= "Cher" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text= "@string/artist"
+            android:layout_marginTop="20dp"/>
 
-    <TextView
-        android:id="@+id/TV_song_album"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text= "@string/album"
-        android:layout_marginTop="20dp"/>
+        <TextView
+            android:id="@+id/song_artist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:text= "Cher" />
 
-    <TextView
-        android:id="@+id/song_album"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        tools:text= "Album name" />
+        <TextView
+            android:id="@+id/TV_song_album"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text= "@string/album"
+            android:layout_marginTop="20dp"/>
 
-    <TextView
-        android:id="@+id/TV_song_genre"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text= "@string/genre"
-        android:layout_marginTop="20dp"/>
+        <TextView
+            android:id="@+id/song_album"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:text= "Album name" />
 
-    <TextView
-        android:id="@+id/song_genre"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        tools:text= "Pop" />
+        <TextView
+            android:id="@+id/TV_song_summary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text= "@string/summary"
+            android:layout_marginTop="20dp"/>
 
-    <Button
-        android:id="@+id/button_add_to_List"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:text="@string/add_song_to_list"/>
+        <TextView
+            android:id="@+id/song_summary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:text= "Pop" />
 
-    <Button
-        android:id="@+id/button_delete_from_List"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/delete_from_list"/>
+        <Button
+            android:id="@+id/button_add_to_List"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            android:text="@string/add_song_to_list"/>
 
+        <Button
+            android:id="@+id/button_delete_from_List"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            android:text="@string/delete_from_list"/>
 
-</LinearLayout>
+    </LinearLayout>
+</ScrollView>

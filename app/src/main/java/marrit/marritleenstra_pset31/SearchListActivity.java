@@ -32,6 +32,7 @@ public class SearchListActivity extends ListActivity {
     private static final String TAG = "ERRORTAG";
     public static final String TITLE = "marrit.marritleenstra_pset31.title";
     public static final String ARTIST = "marrit.marritleenstra_pset31.artist";
+    private static final int REQUEST_CODE_SL = 0;
 
 
 
@@ -68,27 +69,40 @@ public class SearchListActivity extends ListActivity {
             String mArtist = song.getArtist();
 
             // get extra info about the track
-            extraInfoSearch(view, mArtist, mTitle);
+            extraInfoSearch(mArtist, mTitle);
 
 
 
-            //Intent intent = SongListActivity.newIntent(SongListActivity, SongListActivity.i.getId());
+            /*//Intent intent = SongListActivity.newIntent(SongListActivity, SongListActivity.i.getId());
             Intent intent = new Intent(view.getContext(), SongActivity.class);
             Bundle extras = new Bundle();
             extras.putSerializable("SONG_ID", mId);
+            extras.putSerializable("data", mSearchedSongs);
             extras.putString("TITLE", mTitle);
             extras.putString("ARTIST", mArtist);
             extras.putString("SOURCEACT", "SearchListActivity");
             intent.putExtras(extras);
-            view.getContext().startActivity(intent);
+            Log.d(TAG, "starting from SearchListActivity");
+            startActivityForResult(intent, REQUEST_CODE_SL);
+            //view.getContext().startActivity(intent);*/
         }
     }
 
-    public void extraInfoSearch(View view, String artist, String title) {
+    public void extraInfoSearch(String artist, String title) {
         TrackAsyncTask2 asyncTask2 = new TrackAsyncTask2(this);
         Log.d(TAG, "calling asyncTask from extraInfoSearch");
         asyncTask2.execute(artist, title);
         Log.d(TAG, "after asyincTask.execute(extraInfoSearch");
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        if (requestCode == 0) {
+            if (resultCode == RESULT_OK) {
+                ArrayList<Song> mSearchedSongs  = (ArrayList<Song>) intent.getSerializableExtra("data");
+                Log.d(TAG, "onActivityResult finished");
+            }
+        }
     }
 
 

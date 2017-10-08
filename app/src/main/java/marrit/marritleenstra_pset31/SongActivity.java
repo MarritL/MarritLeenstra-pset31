@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.UUID;
 
 import static android.content.ContentValues.TAG;
@@ -22,9 +24,11 @@ public class SongActivity extends AppCompatActivity {
     private TextView mTVAlbum;
     private TextView mSongAlbum;
     private TextView mTVGenre;
-    private TextView mSongGenre;
+    private TextView mSongSummary;
     private Button mButtonAdd;
     private Button mButtonDelete;
+
+    private ArrayList<Song> mSearcedSongs;
 
 
     @Override
@@ -38,8 +42,7 @@ public class SongActivity extends AppCompatActivity {
         mSongArtist = (TextView) findViewById(R.id.song_artist);
         mTVAlbum = (TextView) findViewById(R.id.TV_song_album);
         mSongAlbum = (TextView) findViewById(R.id.song_album);
-        mTVGenre = (TextView) findViewById(R.id.TV_song_genre);
-        mSongGenre = (TextView) findViewById(R.id.song_genre);
+        mSongSummary = (TextView) findViewById(R.id.song_summary);
         mButtonAdd = (Button) findViewById(R.id.button_add_to_List);
         mButtonDelete = (Button) findViewById(R.id.button_delete_from_List);
 
@@ -47,7 +50,7 @@ public class SongActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         String startingAct = extras.getString("SOURCEACT");
-        System.out.println(startingAct);
+        mSearcedSongs = (ArrayList<Song>) extras.getSerializable("data");
 
         // get extras
         if (startingAct.equals("SongListActivity")) {
@@ -60,12 +63,8 @@ public class SongActivity extends AppCompatActivity {
             mSong = new Song();
             mSong.setTitle(extras.getString("TITLE"));
             mSong.setArtist(extras.getString("ARTIST"));
-            mSong.setGenre(extras.getString("GENRE"));
+            mSong.setSummary(extras.getString("SUMMARY"));
             mSong.setAlbum(extras.getString("ALBUM"));
-            //mSongAlbum.setVisibility(View.INVISIBLE);
-            //mTVAlbum.setVisibility(View.INVISIBLE);
-            //mSongGenre.setVisibility(View.INVISIBLE);
-            //mTVGenre.setVisibility(View.INVISIBLE);
             mButtonDelete.setVisibility(View.INVISIBLE);
             mButtonAdd.setOnClickListener(new onClickAddSong());
         }
@@ -83,8 +82,8 @@ public class SongActivity extends AppCompatActivity {
         mSong.setAlbum(mSong.getAlbum());
         mSongAlbum.setText(mSong.getAlbum());
 
-        mSong.setGenre(mSong.getGenre());
-        mSongGenre.setText(mSong.getGenre());
+        mSong.setSummary(mSong.getSummary());
+        mSongSummary.setText(mSong.getSummary());
     }
 
     // add song to ListenList when button clicked
@@ -92,7 +91,6 @@ public class SongActivity extends AppCompatActivity {
 
         @Override
         public void onClick(View view) {
-            // TODO: get other info about song from server!
             SongLab.addSong(mSong);
             Intent intent = new Intent(view.getContext(), SongListActivity.class);
             view.getContext().startActivity(intent);
@@ -109,4 +107,21 @@ public class SongActivity extends AppCompatActivity {
             view.getContext().startActivity(intent);
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent();
+        intent.putExtra("data", mSearcedSongs);
+        setResult(RESULT_OK, intent);
+        finish();
+        //Bundle extras = new Bundle();
+        //extras.putSerializable("data", mSearcedSongs);
+        //extras.putInt("callback", 1);
+        //intent.putExtras(extras);
+        //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        //startActivity(intent);
+    }
+
 }
+
+//TODO: add back functionality
