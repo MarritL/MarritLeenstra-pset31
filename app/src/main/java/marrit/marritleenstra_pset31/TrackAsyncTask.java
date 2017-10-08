@@ -32,6 +32,7 @@ public class TrackAsyncTask extends AsyncTask<String, Integer, String> {
         this.mContext = this.mSearchActivity.getApplicationContext();
     }
 
+
     // do before executing the AsyncTask
     @Override
     protected void onPreExecute() {

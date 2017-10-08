@@ -16,7 +16,6 @@ import java.net.URL;
 public class HttpRequestHelper {
 
     protected static synchronized String downloadFromServer(String... parems) {
-        //String result = "";
         String chosenTag = parems[0];
         String method = parems[1];
         String result = method;
@@ -24,6 +23,7 @@ public class HttpRequestHelper {
         // creeer een geldinge url met je API en de gegeven zoekterm van de gebruiker
         //String urlString = "http://ws.audioscrobbler.com/2.0/" + "?method=track.search&track=" + chosenTag + "&api_key=" + "efe24c656585a96dea7a7e3ea770f3ab"+ "&format=json";
         String urlString = "http://ws.audioscrobbler.com/2.0/" + "?method=" + method + chosenTag + "&api_key=" + "efe24c656585a96dea7a7e3ea770f3ab"+ "&format=json";
+
 
         //maak van je url een URL object
         URL url = null;

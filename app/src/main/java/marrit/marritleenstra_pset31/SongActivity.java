@@ -60,10 +60,12 @@ public class SongActivity extends AppCompatActivity {
             mSong = new Song();
             mSong.setTitle(extras.getString("TITLE"));
             mSong.setArtist(extras.getString("ARTIST"));
-            mSongAlbum.setVisibility(View.INVISIBLE);
-            mTVAlbum.setVisibility(View.INVISIBLE);
-            mSongGenre.setVisibility(View.INVISIBLE);
-            mTVGenre.setVisibility(View.INVISIBLE);
+            mSong.setGenre(extras.getString("GENRE"));
+            mSong.setAlbum(extras.getString("ALBUM"));
+            //mSongAlbum.setVisibility(View.INVISIBLE);
+            //mTVAlbum.setVisibility(View.INVISIBLE);
+            //mSongGenre.setVisibility(View.INVISIBLE);
+            //mTVGenre.setVisibility(View.INVISIBLE);
             mButtonDelete.setVisibility(View.INVISIBLE);
             mButtonAdd.setOnClickListener(new onClickAddSong());
         }

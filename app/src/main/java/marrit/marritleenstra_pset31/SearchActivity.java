@@ -62,7 +62,10 @@ public class SearchActivity extends AppCompatActivity {
         Log.d(TAG, "calling asyncTask from artistSearch");
         asyncTask.execute(artistSearch, "artist.gettoptracks&artist=");
         Log.d(TAG, "after asyincTask.execute(artistSearch");
+
+        mSearchArtist.getText().clear();
     }
+
 
     public void trackStartIntent(ArrayList<Song> songs) {
         Log.d(TAG, "called trackStartIntent");

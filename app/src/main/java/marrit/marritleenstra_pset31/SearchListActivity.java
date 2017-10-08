@@ -66,6 +66,12 @@ public class SearchListActivity extends ListActivity {
             UUID mId = song.getID();
             String mTitle = song.getTitle();
             String mArtist = song.getArtist();
+
+            // get extra info about the track
+            extraInfoSearch(view, mArtist, mTitle);
+
+
+
             //Intent intent = SongListActivity.newIntent(SongListActivity, SongListActivity.i.getId());
             Intent intent = new Intent(view.getContext(), SongActivity.class);
             Bundle extras = new Bundle();
@@ -77,6 +83,14 @@ public class SearchListActivity extends ListActivity {
             view.getContext().startActivity(intent);
         }
     }
+
+    public void extraInfoSearch(View view, String artist, String title) {
+        TrackAsyncTask2 asyncTask2 = new TrackAsyncTask2(this);
+        Log.d(TAG, "calling asyncTask from extraInfoSearch");
+        asyncTask2.execute(artist, title);
+        Log.d(TAG, "after asyincTask.execute(extraInfoSearch");
+    }
+
 
 
 }
