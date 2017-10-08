@@ -56,6 +56,7 @@ public class SearchListActivity extends ListActivity {
         lv.setOnItemClickListener(new listViewListener());
     }
 
+
     private class listViewListener implements AdapterView.OnItemClickListener {
 
         @Override

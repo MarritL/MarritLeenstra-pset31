@@ -47,8 +47,6 @@ public class TrackAsyncTask extends AsyncTask<String, Integer, String> {
     }
 
     // return the result
-
-
     @Override
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
@@ -97,16 +95,13 @@ public class TrackAsyncTask extends AsyncTask<String, Integer, String> {
                     mSongsList.add(song);
                     Log.d(TAG, "after mSongsList.add artist");
                 }
-
-
-                // ga verder naar beneden
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 
         }
 
-        // als je de gevonden data hebt naar volgende activiteit
+        // display results in SearchListActivity
         Log.d(TAG, "before trackStartIntent");
         this.mSearchActivity.trackStartIntent(mSongsList);
         Log.d(TAG, "after trackStartIntent");

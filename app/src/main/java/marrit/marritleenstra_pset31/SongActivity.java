@@ -54,6 +54,7 @@ public class SongActivity extends AppCompatActivity {
             UUID songId = (UUID) extras.getSerializable("SONG_ID");
             mSong = SongLab.getSong(songId);
             mButtonAdd.setVisibility(View.INVISIBLE);
+            mButtonDelete.setOnClickListener(new onClickRemoveSong());
         }
         else if (startingAct.equals("SearchListActivity")) {
             mSong = new Song();
@@ -84,12 +85,24 @@ public class SongActivity extends AppCompatActivity {
         mSongGenre.setText(mSong.getGenre());
     }
 
+    // add song to ListenList when button clicked
     private class onClickAddSong implements View.OnClickListener {
 
         @Override
         public void onClick(View view) {
             // TODO: get other info about song from server!
             SongLab.addSong(mSong);
+            Intent intent = new Intent(view.getContext(), SongListActivity.class);
+            view.getContext().startActivity(intent);
+        }
+    }
+
+    // delete song from ListenList when button clicked
+    private class onClickRemoveSong implements View.OnClickListener {
+
+        @Override
+        public void onClick(View view) {
+            SongLab.removeSong(mSong);
             Intent intent = new Intent(view.getContext(), SongListActivity.class);
             view.getContext().startActivity(intent);
         }

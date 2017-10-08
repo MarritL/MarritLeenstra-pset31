@@ -44,13 +44,6 @@ public class SongListActivity extends ListActivity {
         SongLab songLab = SongLab.get(this);
         mSongs = songLab.getSongs();
 
-        //populate list for testing purposes
-        /*for (int i = 0; i < 10; i++) {
-            Song song = new Song();
-            song.setTitle("Song #" + i);
-            song.setArtist("Artist #" + i);
-            mSongs.add(song);
-        }*/
 
         // instantiate the SongAdapter class
         mAdapter = new SongAdapter(this, R.layout.list_item, mSongs);
@@ -62,14 +55,6 @@ public class SongListActivity extends ListActivity {
 
     }
 
-    /*public static Intent newIntent(Context packageContext, UUID mId) {
-        Intent intent = new Intent(packageContext, SongActivity.class);
-        Bundle extras = new Bundle();
-        extras.putSerializable(EXTRA_SONG_ID, mId);
-        extras.putString(SOURCEACT, "SongListActivity");
-        intent.putExtras(extras);
-        return intent;
-    }*/
 
     // inflate menu
     @Override
