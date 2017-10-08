@@ -25,7 +25,7 @@ public class TrackAsyncTask extends AsyncTask<String, Integer, String> {
     private static final String TAG = "ERRORTAG";
 
     private static final String method1 = "track.search&track=";
-    private static final String mehtod2 = "artist.search&artist=";
+    private static final String mehtod2 = "artist.gettoptracks&artist=";
 
     public TrackAsyncTask(SearchActivity act) {
         this.mSearchActivity = act;
@@ -78,18 +78,20 @@ public class TrackAsyncTask extends AsyncTask<String, Integer, String> {
                 e.printStackTrace();
             }
         }
+        // display tracks of artist when searching for artist
         else if (result.startsWith(mehtod2)) {
-            result =result.replaceFirst(mehtod2, "");
+            result = result.replaceFirst(mehtod2, "");
+
             try {
                 JSONObject trackStreamobj = new JSONObject(result);
-                JSONObject resultsObj = trackStreamobj.getJSONObject("results");
-                JSONObject artistmatchesObj = resultsObj.getJSONObject("artistmatches");
-                JSONArray artistObj = artistmatchesObj.getJSONArray("artist");
-                for (int i = 0; i < artistObj.length(); i++) {
-                    JSONObject track = artistObj.getJSONObject(i);
+                JSONObject resultsObj = trackStreamobj.getJSONObject("toptracks");
+                JSONArray trackObj = resultsObj.getJSONArray("track");
+                for (int i = 0; i < trackObj.length(); i++) {
+                    JSONObject track = trackObj.getJSONObject(i);
                     Song song = new Song();
-                    //song.setTitle(track.getString("name"));
-                    song.setArtist(track.getString("name"));
+                    song.setTitle(track.getString("name"));
+                    JSONObject mArtist = track.getJSONObject("artist");
+                    song.setArtist(mArtist.getString("name"));
                     //song.setAlbum(track.getString("album"));
                     //song.setGenre(track.getString("genre"));
                     mSongsList.add(song);

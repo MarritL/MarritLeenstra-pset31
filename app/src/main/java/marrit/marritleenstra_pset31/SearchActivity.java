@@ -60,7 +60,7 @@ public class SearchActivity extends AppCompatActivity {
         String artistSearch = mSearchArtist.getText().toString();
         TrackAsyncTask asyncTask = new TrackAsyncTask(this);
         Log.d(TAG, "calling asyncTask from artistSearch");
-        asyncTask.execute(artistSearch, "artist.search&artist=");
+        asyncTask.execute(artistSearch, "artist.gettoptracks&artist=");
         Log.d(TAG, "after asyincTask.execute(artistSearch");
     }
 
