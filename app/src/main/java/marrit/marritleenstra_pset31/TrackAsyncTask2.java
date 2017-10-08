@@ -4,15 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.util.Log;
 import android.widget.Toast;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.UUID;
 
 /**
@@ -24,9 +21,6 @@ public class TrackAsyncTask2 extends AsyncTask<String, Integer, String> {
     private SearchListActivity mSearchListActivity;
 
     private static final String TAG = "ERRORTAG";
-
-    private static final String method1 = "track.search&track=";
-    private static final String mehtod2 = "artist.gettoptracks&artist=";
 
     public TrackAsyncTask2(SearchListActivity act) {
         this.mSearchListActivity = act;
@@ -53,59 +47,48 @@ public class TrackAsyncTask2 extends AsyncTask<String, Integer, String> {
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
         Log.d(TAG, "called onPostExecute");
-        //ArrayList<Song> mSongsList = new ArrayList<>();
-        String genre = "";
-        System.out.println(result);
 
-        // check which method is used
-        //if (result.startsWith(method1)) {
-            //result =result.replaceFirst(method1, "");
             try {
-                JSONObject trackStreamobj = new JSONObject(result);
-                JSONObject track = trackStreamobj.getJSONObject("track");
+            JSONObject trackStreamobj = new JSONObject(result);
+            JSONObject track = trackStreamobj.getJSONObject("track");
 
-                //for (int i = 0; i < track.length(); i++) {
+            Song song = new Song();
+            song.setTitle(track.getString("name"));
 
-                    Song song = new Song();
-                    song.setTitle(track.getString("name"));
+            JSONObject mArtist = track.getJSONObject("artist");
+            song.setArtist(mArtist.getString("name"));
 
-                    JSONObject mArtist = track.getJSONObject("artist");
-                    song.setArtist(mArtist.getString("name"));
+            JSONObject mAlbum = track.getJSONObject("album");
+            song.setAlbum(mAlbum.getString("title"));
+            JSONObject wikiObj = track.getJSONObject("wiki");
 
-                    JSONObject mAlbum = track.getJSONObject("album");
-                    song.setAlbum(mAlbum.getString("title"));
-                    JSONObject wikiObj = track.getJSONObject("wiki");
+            song.setSummary(wikiObj.getString("summary"));
+            Log.d(TAG, "after add info to song");
 
-                    song.setSummary(wikiObj.getString("summary"));
-                    Log.d(TAG, "after add info to song");
 
-                    Intent intent = new Intent(this.mSearchListActivity, SongActivity.class);
-                    UUID mmId = song.getID();
-                    String mmTitle = song.getTitle();
-                    String mmArtist = song.getArtist();
-                    String mmAlbum = song.getAlbum();
-                    String mmSummary = song.getSummary();
+            Intent intent = new Intent(this.mSearchListActivity, SongActivity.class);
+            UUID mmId = song.getID();
+            String mmTitle = song.getTitle();
+            String mmArtist = song.getArtist();
+            String mmAlbum = song.getAlbum();
+            String mmSummary = song.getSummary();
 
-                    Bundle extras = new Bundle();
-                    extras.putSerializable("SONG_ID", mmId);
-                    extras.putString("TITLE", mmTitle);
-                    extras.putString("ARTIST", mmArtist);
-                    extras.putString("ALBUM", mmAlbum);
-                    extras.putString("SUMMARY", mmSummary);
-                    extras.putString("SOURCEACT", "SearchListActivity");
-                    intent.putExtras(extras);
-                    Log.d(TAG, "starting from TrackAsyncTask2");
-                    this.mSearchListActivity.startActivityForResult(intent, 0);
+            Bundle extras = new Bundle();
+            extras.putSerializable("SONG_ID", mmId);
+            extras.putString("TITLE", mmTitle);
+            extras.putString("ARTIST", mmArtist);
+            extras.putString("ALBUM", mmAlbum);
+            extras.putString("SUMMARY", mmSummary);
+            extras.putString("SOURCEACT", "SearchListActivity");
+            intent.putExtras(extras);
+            Log.d(TAG, "starting from TrackAsyncTask2");
+            this.mSearchListActivity.startActivityForResult(intent, 0);
 
-                //}
 
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
-
-
     }
 
-
 }
+

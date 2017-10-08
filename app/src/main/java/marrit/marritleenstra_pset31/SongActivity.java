@@ -110,18 +110,10 @@ public class SongActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent();
+        Intent intent = new Intent(this, SearchListActivity.class);
         intent.putExtra("data", mSearcedSongs);
-        setResult(RESULT_OK, intent);
         finish();
-        //Bundle extras = new Bundle();
-        //extras.putSerializable("data", mSearcedSongs);
-        //extras.putInt("callback", 1);
-        //intent.putExtras(extras);
-        //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        //startActivity(intent);
     }
 
 }
 
-//TODO: add back functionality

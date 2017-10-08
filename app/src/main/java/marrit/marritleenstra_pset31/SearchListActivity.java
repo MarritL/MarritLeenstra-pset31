@@ -69,11 +69,13 @@ public class SearchListActivity extends ListActivity {
             String mArtist = song.getArtist();
 
             // get extra info about the track
+            Log.d(TAG, "before extraInfoSearch");
             extraInfoSearch(mArtist, mTitle);
+            Log.d(TAG, "after extraInfoSearch");
 
 
 
-            /*//Intent intent = SongListActivity.newIntent(SongListActivity, SongListActivity.i.getId());
+            // if extraInfoSearch failed
             Intent intent = new Intent(view.getContext(), SongActivity.class);
             Bundle extras = new Bundle();
             extras.putSerializable("SONG_ID", mId);
@@ -95,15 +97,15 @@ public class SearchListActivity extends ListActivity {
         Log.d(TAG, "after asyincTask.execute(extraInfoSearch");
     }
 
-    @Override
+    /*@Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         if (requestCode == 0) {
             if (resultCode == RESULT_OK) {
-                ArrayList<Song> mSearchedSongs  = (ArrayList<Song>) intent.getSerializableExtra("data");
+                //ArrayList<Song> mSearchedSongs  = (ArrayList<Song>) intent.getSerializableExtra("data");
                 Log.d(TAG, "onActivityResult finished");
             }
         }
-    }
+    }*/
 
 
 
