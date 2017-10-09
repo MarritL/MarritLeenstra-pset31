@@ -9,8 +9,6 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 
 
@@ -27,23 +25,20 @@ public class SongLab {
     private static ArrayList<Song> mSongs;
 
     public static SongLab get(Context context) {
+        sSongLab = retrieveSongLabFromSharedPrefs(context);
         if (sSongLab == null) {
             sSongLab = new SongLab(context);
         }
         return sSongLab;
     }
 
-
     private SongLab(Context context) {
         mSongs = new ArrayList<>();
     }
 
-    /*public ArrayList<Song> getSongs() {
-        return mSongs;
-    }*/
 
     public ArrayList<Song> getSongs(Context context) {
-        ArrayList<Song> mSongs = retrieveFromSharedPrefs(context);
+        mSongs = retrieveArrayFromSharedPrefs(context);
         return mSongs;
     }
 
@@ -78,10 +73,15 @@ public class SongLab {
         String jsonSongs = gson.toJson(mSongs);
 
         editor.putString("SAVEDSONGS", jsonSongs);
+
+        Gson songLabGson = new Gson();
+        String jsonSongLab = songLabGson.toJson(sSongLab);
+        editor.putString("SONGLAB", jsonSongLab);
+
         editor.apply();
     }
 
-    public static ArrayList<Song> retrieveFromSharedPrefs(Context context) {
+    public static ArrayList<Song>  retrieveArrayFromSharedPrefs(Context context) {
         SharedPreferences prefs = context.getSharedPreferences("SETTINGS", context.MODE_PRIVATE);
 
         Gson gson = new Gson();
@@ -94,7 +94,17 @@ public class SongLab {
         }
 
         return mSongs;
+    }
 
+    public static SongLab retrieveSongLabFromSharedPrefs(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences("SETTINGS", context.MODE_PRIVATE);
+
+        Gson songLabGson = new Gson();
+        String jsonSongLab = prefs.getString("SONGLAB", null);
+
+        Type type2 = new TypeToken<SongLab>() {}.getType();
+        SongLab sSongLab = songLabGson.fromJson(jsonSongLab, type2);
+        return sSongLab;
     }
 
 
