@@ -92,6 +92,7 @@ public class SongActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             SongLab.addSong(mSong);
+            SongLab.saveToSharedPrefs(view, view.getContext());
             Intent intent = new Intent(view.getContext(), SongListActivity.class);
             view.getContext().startActivity(intent);
         }
@@ -103,6 +104,7 @@ public class SongActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             SongLab.removeSong(mSong);
+            SongLab.saveToSharedPrefs(view, view.getContext());
             Intent intent = new Intent(view.getContext(), SongListActivity.class);
             view.getContext().startActivity(intent);
         }

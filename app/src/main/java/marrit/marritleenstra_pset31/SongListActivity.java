@@ -41,8 +41,9 @@ public class SongListActivity extends ListActivity {
         Log.d(TAG, "SongListActivity started");
 
 
+
         SongLab songLab = SongLab.get(this);
-        mSongs = songLab.getSongs();
+        mSongs = songLab.getSongs(this);
 
 
         // instantiate the SongAdapter class

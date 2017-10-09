@@ -1,8 +1,16 @@
 package marrit.marritleenstra_pset31;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.view.View;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 
@@ -30,7 +38,12 @@ public class SongLab {
         mSongs = new ArrayList<>();
     }
 
-    public ArrayList<Song> getSongs() {
+    /*public ArrayList<Song> getSongs() {
+        return mSongs;
+    }*/
+
+    public ArrayList<Song> getSongs(Context context) {
+        ArrayList<Song> mSongs = retrieveFromSharedPrefs(context);
         return mSongs;
     }
 
@@ -51,8 +64,38 @@ public class SongLab {
         mSongs.add(s);
     }
 
+
     public static void removeSong(Song s) {
         mSongs.remove(s);
     }
+
+    // method source: https://stackoverflow.com/questions/22984696/storing-array-list-object-in-sharedpreferences
+    public static void saveToSharedPrefs(View view, Context context) {
+        SharedPreferences prefs = context.getSharedPreferences("SETTINGS", context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+
+        Gson gson = new Gson();
+        String jsonSongs = gson.toJson(mSongs);
+
+        editor.putString("SAVEDSONGS", jsonSongs);
+        editor.apply();
+    }
+
+    public static ArrayList<Song> retrieveFromSharedPrefs(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences("SETTINGS", context.MODE_PRIVATE);
+
+        Gson gson = new Gson();
+        String jsonSongs = prefs.getString("SAVEDSONGS", null);
+
+        if (jsonSongs != null) {
+            Type type = new TypeToken<ArrayList<Song>>() {}.getType();
+            ArrayList<Song> mSavedSongs = gson.fromJson(jsonSongs, type);
+            return mSavedSongs;
+        }
+
+        return mSongs;
+
+    }
+
 
 }
