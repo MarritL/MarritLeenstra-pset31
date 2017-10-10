@@ -67,8 +67,6 @@ public class TrackAsyncTask extends AsyncTask<String, Integer, String> {
                     Song song = new Song();
                     song.setTitle(track.getString("name"));
                     song.setArtist(track.getString("artist"));
-                    //song.setAlbum(track.getString("album"));
-                    //song.setGenre(track.getString("genre"));
                     mSongsList.add(song);
                     Log.d(TAG, "after mSongsList.add track");
                 }
@@ -91,8 +89,6 @@ public class TrackAsyncTask extends AsyncTask<String, Integer, String> {
                     song.setTitle(track.getString("name"));
                     JSONObject mArtist = track.getJSONObject("artist");
                     song.setArtist(mArtist.getString("name"));
-                    //song.setAlbum(track.getString("album"));
-                    //song.setGenre(track.getString("genre"));
                     mSongsList.add(song);
                     Log.d(TAG, "after mSongsList.add artist");
                 }

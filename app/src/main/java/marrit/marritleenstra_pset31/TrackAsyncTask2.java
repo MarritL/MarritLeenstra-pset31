@@ -53,6 +53,7 @@ public class TrackAsyncTask2 extends AsyncTask<String, Integer, String> {
             JSONObject track = trackStreamobj.getJSONObject("track");
 
             Song song = new Song();
+
             song.setTitle(track.getString("name"));
 
             JSONObject mArtist = track.getJSONObject("artist");

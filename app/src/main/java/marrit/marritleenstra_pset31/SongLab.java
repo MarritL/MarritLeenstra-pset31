@@ -51,6 +51,20 @@ public class SongLab {
         return null;
     }
 
+    public static Boolean duplicateSong(Song s) {
+        String title = s.getTitle();
+        String artist = s.getArtist();
+
+        for (Song song: mSongs) {
+            if (song.getTitle().equals(title)) {
+                if (song.getArtist().equals(artist)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public static void addSong(Song s) {
         s.setTitle(s.getTitle());
         s.setArtist(s.getArtist());

@@ -33,7 +33,7 @@ public class Song implements Serializable {
         mId = UUID.randomUUID();
     }
 
-    // getters and setters for all fields
+
     public UUID getID() {
         return mId;
     }

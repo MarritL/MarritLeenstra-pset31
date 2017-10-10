@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -91,10 +92,15 @@ public class SongActivity extends AppCompatActivity {
 
         @Override
         public void onClick(View view) {
-            SongLab.addSong(mSong);
-            SongLab.saveToSharedPrefs(view, view.getContext());
-            Intent intent = new Intent(view.getContext(), SongListActivity.class);
-            view.getContext().startActivity(intent);
+            if (!SongLab.duplicateSong(mSong)) {
+                SongLab.addSong(mSong);
+                SongLab.saveToSharedPrefs(view, view.getContext());
+                Intent intent = new Intent(view.getContext(), SongListActivity.class);
+                view.getContext().startActivity(intent);
+            }
+            else {
+                Toast.makeText(SongActivity.this, "This song is already in your To-Listen List!", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
