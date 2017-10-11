@@ -73,20 +73,6 @@ public class SearchListActivity extends ListActivity {
             extraInfoSearch(mArtist, mTitle);
             Log.d(TAG, "after extraInfoSearch");
 
-
-
-            // if extraInfoSearch failed
-            Intent intent = new Intent(view.getContext(), SongActivity.class);
-            Bundle extras = new Bundle();
-            extras.putSerializable("SONG_ID", mId);
-            extras.putSerializable("data", mSearchedSongs);
-            extras.putString("TITLE", mTitle);
-            extras.putString("ARTIST", mArtist);
-            extras.putString("SOURCEACT", "SearchListActivity");
-            intent.putExtras(extras);
-            Log.d(TAG, "starting from SearchListActivity");
-            startActivityForResult(intent, REQUEST_CODE_SL);
-            //view.getContext().startActivity(intent);*/
         }
     }
 

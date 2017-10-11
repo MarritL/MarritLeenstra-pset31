@@ -51,6 +51,8 @@ public class HttpRequestHelper2 {
                 while ((line = bReader.readLine()) != null) {
                     result += line;
                 }
+                // add the artist and songtitle to the end of the result to use in TrackAsyncTask2
+                result += ",,,"+chosenArtist+"-"+chosenTitle;
             }
         } catch (IOException e ) {
             e.printStackTrace();

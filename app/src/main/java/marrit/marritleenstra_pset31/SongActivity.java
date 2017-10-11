@@ -9,13 +9,12 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.lang.reflect.Array;
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.UUID;
 
 import static android.content.ContentValues.TAG;
-import static marrit.marritleenstra_pset31.SongListActivity.SOURCEACT;
-
 
 public class SongActivity extends AppCompatActivity {
 
@@ -24,7 +23,7 @@ public class SongActivity extends AppCompatActivity {
     private TextView mSongArtist;
     private TextView mTVAlbum;
     private TextView mSongAlbum;
-    private TextView mTVGenre;
+    private TextView mTVSummary;
     private TextView mSongSummary;
     private Button mButtonAdd;
     private Button mButtonDelete;
@@ -42,6 +41,7 @@ public class SongActivity extends AppCompatActivity {
         mSongTitle = (TextView) findViewById(R.id.song_title);
         mSongArtist = (TextView) findViewById(R.id.song_artist);
         mTVAlbum = (TextView) findViewById(R.id.TV_song_album);
+        mTVSummary = (TextView) findViewById(R.id.TV_song_summary);
         mSongAlbum = (TextView) findViewById(R.id.song_album);
         mSongSummary = (TextView) findViewById(R.id.song_summary);
         mButtonAdd = (Button) findViewById(R.id.button_add_to_List);
@@ -69,10 +69,16 @@ public class SongActivity extends AppCompatActivity {
             mButtonDelete.setVisibility(View.INVISIBLE);
             mButtonAdd.setOnClickListener(new onClickAddSong());
         }
-        else {
-            System.out.println("intent starter not found");
+        else if (startingAct.equals("NoWiki")){
+            mSong = new Song();
+            mSong.setTitle(extras.getString("TITLE"));
+            mSong.setArtist(extras.getString("ARTIST"));
+            mTVSummary.setVisibility(View.INVISIBLE);
+            mTVAlbum.setVisibility(View.INVISIBLE);
+            mButtonDelete.setVisibility(View.INVISIBLE);
+            Toast.makeText(SongActivity.this, "Sorry, no extra info available.", Toast.LENGTH_SHORT).show();
+            mButtonAdd.setOnClickListener(new onClickAddSong());
         }
-
 
         mSong.setTitle(mSong.getTitle());
         mSongTitle.setText(mSong.getTitle());
@@ -114,13 +120,6 @@ public class SongActivity extends AppCompatActivity {
             Intent intent = new Intent(view.getContext(), SongListActivity.class);
             view.getContext().startActivity(intent);
         }
-    }
-
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(this, SearchListActivity.class);
-        intent.putExtra("data", mSearcedSongs);
-        finish();
     }
 
 }

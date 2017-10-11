@@ -10,6 +10,7 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
 import java.util.UUID;
 
 /**
@@ -88,7 +89,30 @@ public class TrackAsyncTask2 extends AsyncTask<String, Integer, String> {
 
             } catch (JSONException e) {
                 e.printStackTrace();
+                String[] results =result.split(",,,");
+                String chosens = results[1];
+                String[] tags = chosens.split("-");
+                String mmArtist = tags[0];
+                String mmTitle = tags[1];
+
+                // if extraInfoSearch failed
+                Intent intent = new Intent(mSearchListActivity, SongActivity.class);
+                Song song = new Song();
+                UUID mmId = song.getID();
+                Bundle extras = new Bundle();
+                extras.putSerializable("SONG_ID", mmId);
+                extras.putString("TITLE", mmTitle);
+                extras.putString("ARTIST", mmArtist);
+                extras.putString("SOURCEACT", "NoWiki");
+                intent.putExtras(extras);
+                Log.d(TAG, "starting from SearchListActivity");
+                this.mSearchListActivity.startActivityForResult(intent, 0);
+
+
+
             }
+
+
     }
 
 }
