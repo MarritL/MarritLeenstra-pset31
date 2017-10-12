@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 
+
 /**
  * Created by Marrit on 27-9-2017.
  * Displays a list of songs the user wants to listen (To-Listen List)
@@ -37,6 +38,7 @@ public class SongListActivity extends ListActivity {
 
         // display list
         ListView lv = getListView();
+
 
         lv.setOnItemClickListener(new MyActivityListener());
 

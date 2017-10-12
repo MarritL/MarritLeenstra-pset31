@@ -71,14 +71,14 @@
         <Button
             android:id="@+id/button_add_to_List"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginTop="80dp"
             android:text="@string/add_song_to_list"/>
 
         <Button
             android:id="@+id/button_delete_from_List"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginBottom="40dp"
             android:text="@string/delete_from_list"/>
 

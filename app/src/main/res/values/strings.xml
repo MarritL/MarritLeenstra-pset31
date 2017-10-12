@@ -4,11 +4,14 @@
     <string name="artist">Artist</string>
     <string name="album">Album</string>
     <string name="summary">Wiki</string>
-    <string name="empty_list">There\'s nothing in your \" To listen list \" yet</string>
+    <string name="empty_list">There\'s nothing in your \" To listen list \" yet.
+        Add a song via de menu!</string>
+    <string name="empty_list_searchedSong">Sorry, no matches found!</string>
     <string name="add_song">Add Song</string>
     <string name="search_artist">Search artist</string>
     <string name="search_track">Search track</string>
     <string name="search">Search</string>
     <string name="add_song_to_list">Add Song to Listen List</string>
     <string name="delete_from_list">Delete Song from Listen List</string>
+    <string name="To_Listen_List">To-Listen List</string>
 </resources>

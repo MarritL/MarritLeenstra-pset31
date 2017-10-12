@@ -17,8 +17,8 @@
         android:textSize="16sp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:text ="@string/title"
-        />
+        android:paddingTop="21dp"
+        android:text ="@string/title"/>
 
     <TextView
         android:id="@+id/song_artist2"
@@ -28,97 +28,7 @@
         android:textSize="14sp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
+        android:paddingBottom="16dp"
         android:text="@string/artist"/>
 
 </LinearLayout>
-
-<!--
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="fill_parent"
-                android:layout_height="?android:attr/listPreferredItemHeight"
-                android:padding="6dip">
-
-    &lt;!&ndash; Item Name &ndash;&gt;
-    <TextView
-        android:id="@+id/toptext"
-
-        android:layout_width="wrap_content"
-        android:layout_height="26dip"
-
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-
-        android:textStyle="bold"
-        android:singleLine="true"
-        android:ellipsize="marquee"
-        />
-
-    &lt;!&ndash; Actual Item Name Data &ndash;&gt;
-    <TextView
-        android:id="@+id/toptextdata"
-
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@id/toptext"
-
-        android:ellipsize="marquee"
-        />
-
-    &lt;!&ndash; Price Tag &ndash;&gt;
-    <TextView
-        android:id="@+id/middletext"
-
-        android:layout_width="wrap_content"
-        android:layout_height="26dip"
-
-        android:layout_alignParentLeft="true"
-        android:layout_below="@id/toptext"
-
-        android:textStyle="bold"
-        android:gravity="center_vertical"
-        />
-
-    &lt;!&ndash; Actual Price Data &ndash;&gt;
-    <TextView
-        android:id="@+id/middletextdata"
-
-        android:layout_width="fill_parent"
-        android:layout_height="26dip"
-
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/toptext"
-        android:layout_toRightOf="@id/middletext"
-
-        android:gravity="center_vertical"
-        />
-
-    &lt;!&ndash; Description Tag &ndash;&gt;
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/middletext"
-
-        android:textStyle="bold"
-        android:id="@+id/bottomtext"
-        android:singleLine="false"
-        />
-    &lt;!&ndash; This is the actual description &ndash;&gt;
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_below="@id/bottomtext"
-
-
-        android:id="@+id/desctext"
-        android:singleLine="false"
-        />
-</RelativeLayout>
--->

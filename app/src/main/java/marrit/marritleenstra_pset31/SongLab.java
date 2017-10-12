@@ -18,14 +18,14 @@ import java.util.UUID;
  * 3th edition. Chapter 8. Changed to ArrayList (not List) and added some methods.
  */
 
- class SongLab {
+ public class SongLab {
 
     // declare variables
     private static SongLab sSongLab;
     private static ArrayList<Song> mSongs;
 
     // get the SongLab object
-    static SongLab get(Context context) {
+    public static SongLab get(Context context) {
         sSongLab = retrieveSongLabFromSharedPrefs(context);
         if (sSongLab == null) {
             sSongLab = new SongLab();
@@ -39,13 +39,13 @@ import java.util.UUID;
     }
 
     // fill the arrayList with songs if in Shared preferences
-    ArrayList<Song> getSongs(Context context) {
+    public ArrayList<Song> getSongs(Context context) {
         mSongs = retrieveArrayFromSharedPrefs(context);
         return mSongs;
     }
 
     // find the song with the specified id
-    static Song getSong(UUID id) {
+    public static Song getSong(UUID id) {
         for (Song song : mSongs) {
             if (song.getID().equals(id)) {
                 return song;
@@ -55,7 +55,7 @@ import java.util.UUID;
     }
 
     // check if the specified song is already in the arraylist
-    static Boolean duplicateSong(Song s) {
+    public static Boolean duplicateSong(Song s) {
         String title = s.getTitle();
         String artist = s.getArtist();
 
@@ -70,7 +70,7 @@ import java.util.UUID;
     }
 
     // add song to the arrayList with all info available
-     static void addSong(Song s) {
+     public static void addSong(Song s) {
         s.setTitle(s.getTitle());
         s.setArtist(s.getArtist());
         s.setAlbum(s.getAlbum());
@@ -79,13 +79,13 @@ import java.util.UUID;
     }
 
     // remove song from arrayList
-    static void removeSong(Song s) {
+    public static void removeSong(Song s) {
         mSongs.remove(s);
     }
 
     // save songLab and it's list of songs to the shared preferences to make them persistent
     // method source: https://stackoverflow.com/questions/22984696/storing-array-list-object-in-sharedpreferences
-    static void saveToSharedPrefs(Context context) {
+    public static void saveToSharedPrefs(Context context) {
         SharedPreferences prefs = context.getSharedPreferences("SETTINGS", context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
 
