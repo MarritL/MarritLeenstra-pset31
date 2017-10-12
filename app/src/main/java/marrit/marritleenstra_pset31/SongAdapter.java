@@ -18,18 +18,14 @@ import java.util.ArrayList;
  * 3th edition.
  */
 
-public class SongAdapter extends ArrayAdapter<Song> {
+class SongAdapter extends ArrayAdapter<Song> {
 
-    // declaring an arraylist of Songs
-    private ArrayList<Song> mSongs;
-    private ArrayList<Song> mSearchedSongs;
+    // declaring an arrayList of Songs
+    private final ArrayList<Song> mSongs;
 
-    // declare textviews
-    public TextView mTitle;
-    public TextView mArtist;
 
     // construct an adapter for the To Listen List
-    public SongAdapter(Context context, int textViewResourceId, ArrayList<Song> mSongs) {
+    SongAdapter(Context context, int textViewResourceId, ArrayList<Song> mSongs) {
         super(context, textViewResourceId, mSongs);
         this.mSongs = mSongs;
     }
@@ -52,8 +48,8 @@ public class SongAdapter extends ArrayAdapter<Song> {
         if (i != null) {
 
             // initiate the TextViews
-            mTitle = (TextView) v.findViewById(R.id.song_title2);
-            mArtist = (TextView) v.findViewById(R.id.song_artist2);
+            TextView mTitle = (TextView) v.findViewById(R.id.song_title2);
+            TextView mArtist = (TextView) v.findViewById(R.id.song_artist2);
 
             // if TextView is not null, set text according to Song i
             if (mTitle != null) {

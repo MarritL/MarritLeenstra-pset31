@@ -2,7 +2,6 @@ package marrit.marritleenstra_pset31;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.view.View;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -16,33 +15,37 @@ import java.util.UUID;
  * Created by Marrit on 26-9-2017.
  * Class containing the centralized data stash for Song objects.
  * Based on Phillips, Stewart, Marsicano (2017). Android Programming. The big nerd ranch guide.
- * 3th edition. Chapter 8. Changed to ArrayList (not List).
+ * 3th edition. Chapter 8. Changed to ArrayList (not List) and added some methods.
  */
 
-public class SongLab {
-    private static SongLab sSongLab;
+ class SongLab {
 
+    // declare variables
+    private static SongLab sSongLab;
     private static ArrayList<Song> mSongs;
 
-    public static SongLab get(Context context) {
+    // get the SongLab object
+    static SongLab get(Context context) {
         sSongLab = retrieveSongLabFromSharedPrefs(context);
         if (sSongLab == null) {
-            sSongLab = new SongLab(context);
+            sSongLab = new SongLab();
         }
         return sSongLab;
     }
 
-    private SongLab(Context context) {
+    // create a new mSongs arrayList for the new SongLab
+    private SongLab() {
         mSongs = new ArrayList<>();
     }
 
-
-    public ArrayList<Song> getSongs(Context context) {
+    // fill the arrayList with songs if in Shared preferences
+    ArrayList<Song> getSongs(Context context) {
         mSongs = retrieveArrayFromSharedPrefs(context);
         return mSongs;
     }
 
-    public static Song getSong(UUID id) {
+    // find the song with the specified id
+    static Song getSong(UUID id) {
         for (Song song : mSongs) {
             if (song.getID().equals(id)) {
                 return song;
@@ -51,7 +54,8 @@ public class SongLab {
         return null;
     }
 
-    public static Boolean duplicateSong(Song s) {
+    // check if the specified song is already in the arraylist
+    static Boolean duplicateSong(Song s) {
         String title = s.getTitle();
         String artist = s.getArtist();
 
@@ -65,7 +69,8 @@ public class SongLab {
         return false;
     }
 
-    public static void addSong(Song s) {
+    // add song to the arrayList with all info available
+     static void addSong(Song s) {
         s.setTitle(s.getTitle());
         s.setArtist(s.getArtist());
         s.setAlbum(s.getAlbum());
@@ -73,13 +78,14 @@ public class SongLab {
         mSongs.add(s);
     }
 
-
-    public static void removeSong(Song s) {
+    // remove song from arrayList
+    static void removeSong(Song s) {
         mSongs.remove(s);
     }
 
+    // save songLab and it's list of songs to the shared preferences to make them persistent
     // method source: https://stackoverflow.com/questions/22984696/storing-array-list-object-in-sharedpreferences
-    public static void saveToSharedPrefs(View view, Context context) {
+    static void saveToSharedPrefs(Context context) {
         SharedPreferences prefs = context.getSharedPreferences("SETTINGS", context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
 
@@ -95,7 +101,8 @@ public class SongLab {
         editor.apply();
     }
 
-    public static ArrayList<Song>  retrieveArrayFromSharedPrefs(Context context) {
+    // get the arrayList from the shared preferences
+    private static ArrayList<Song>  retrieveArrayFromSharedPrefs(Context context) {
         SharedPreferences prefs = context.getSharedPreferences("SETTINGS", context.MODE_PRIVATE);
 
         Gson gson = new Gson();
@@ -110,7 +117,8 @@ public class SongLab {
         return mSongs;
     }
 
-    public static SongLab retrieveSongLabFromSharedPrefs(Context context) {
+    // get the SongLab from the shared preferences
+    private static SongLab retrieveSongLabFromSharedPrefs(Context context) {
         SharedPreferences prefs = context.getSharedPreferences("SETTINGS", context.MODE_PRIVATE);
 
         Gson songLabGson = new Gson();
@@ -120,6 +128,5 @@ public class SongLab {
         SongLab sSongLab = songLabGson.fromJson(jsonSongLab, type2);
         return sSongLab;
     }
-
 
 }

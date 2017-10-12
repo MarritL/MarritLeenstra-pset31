@@ -1,61 +1,46 @@
 package marrit.marritleenstra_pset31;
 
-import android.app.Activity;
 import android.app.ListActivity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
-
 import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
-
-import static android.content.ContentValues.TAG;
 
 
 /**
  * Created by Marrit on 27-9-2017.
+ * Displays a list of songs the user wants to listen (To-Listen List)
  * Based on: https://devtut.wordpress.com/2011/06/09/custom-arrayadapter-for-a-listview-android/
  */
 
 public class SongListActivity extends ListActivity {
 
-    // declare variables
-    private ArrayList<Song> mSongs = new ArrayList<Song>();
-    private SongAdapter mAdapter;
-
-    // add static strings for key-value pairs
-    public static final String EXTRA_SONG_ID = "marrit.marritleenstra_pset31.SongId";
-    public static final String SOURCEACT = "marrit.marritleenstra_pset31.SourceActivity";
-
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_song_list);
-        Log.d(TAG, "SongListActivity started");
 
-
-
+        // get the songs the user put on the list
         SongLab songLab = SongLab.get(this);
-        mSongs = songLab.getSongs(this);
-
+        ArrayList<Song> mSongs = songLab.getSongs(this);
 
         // instantiate the SongAdapter class
-        mAdapter = new SongAdapter(this, R.layout.list_item, mSongs);
+        SongAdapter mAdapter = new SongAdapter(this, R.layout.list_item, mSongs);
         setListAdapter(mAdapter);
 
+        // display list
         ListView lv = getListView();
 
         lv.setOnItemClickListener(new MyActivityListener());
 
     }
-
 
     // inflate menu
     @Override
@@ -81,6 +66,24 @@ public class SongListActivity extends ListActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    // listener that starts the songActivity with the right song if item clicked
+    private class MyActivityListener implements AdapterView.OnItemClickListener {
+
+    @Override
+    public void onItemClick(AdapterView parent, View view, int position, long id) {
+
+        Song song = (Song) parent.getItemAtPosition(position);
+        UUID mId = song.getID();
+        Intent intent = new Intent(view.getContext(), SongActivity.class);
+        Bundle extras = new Bundle();
+        extras.putSerializable("SONG_ID", mId);
+        extras.putString("SOURCEACT", "SongListActivity");
+        intent.putExtras(extras);
+
+        view.getContext().startActivity(intent);
+    }
     }
 
 }

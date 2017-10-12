@@ -1,9 +1,7 @@
 package marrit.marritleenstra_pset31;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -12,22 +10,22 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import static android.content.ContentValues.TAG;
 
 /**
  * Created by Marrit on 2-10-2017.
+ * Method for asynchronous searching in the database of Last.fm
  */
 
-public class TrackAsyncTask extends AsyncTask<String, Integer, String> {
-    private Context mContext;
-    private SearchActivity mSearchActivity;
+class TrackAsyncTask extends AsyncTask<String, Integer, String> {
 
-    private static final String TAG = "ERRORTAG";
+    // declare variables
+    private final Context mContext;
+    private final SearchActivity mSearchActivity;
 
     private static final String method1 = "track.search&track=";
     private static final String mehtod2 = "artist.gettoptracks&artist=";
 
-    public TrackAsyncTask(SearchActivity act) {
+    TrackAsyncTask(SearchActivity act) {
         this.mSearchActivity = act;
         this.mContext = this.mSearchActivity.getApplicationContext();
     }
@@ -36,13 +34,12 @@ public class TrackAsyncTask extends AsyncTask<String, Integer, String> {
     // do before executing the AsyncTask
     @Override
     protected void onPreExecute() {
-        Toast.makeText(mContext, "Searching for tracks...", Toast.LENGTH_SHORT).show();
+        Toast.makeText(mContext, "Searching...", Toast.LENGTH_SHORT).show();
     }
 
     // the AsyncTask = search in last.fm database
     @Override
     protected String doInBackground(String... params) {
-        Log.d(TAG, "called doInBackground");
         return HttpRequestHelper.downloadFromServer(params);
 
     }
@@ -51,12 +48,16 @@ public class TrackAsyncTask extends AsyncTask<String, Integer, String> {
     @Override
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
-        Log.d(TAG, "called onPostExecute");
+
+        // initiate a new arrayList to display the songs found
         ArrayList<Song> mSongsList = new ArrayList<>();
 
         // check which method is used
         if (result.startsWith(method1)) {
+            // delete the extra info about the method used
             result =result.replaceFirst(method1, "");
+
+            // retrieve the songs and cast from JSON to Song objects, then put them in arrayList
             try {
                 JSONObject trackStreamobj = new JSONObject(result);
                 JSONObject resultsObj = trackStreamobj.getJSONObject("results");
@@ -68,17 +69,18 @@ public class TrackAsyncTask extends AsyncTask<String, Integer, String> {
                     song.setTitle(track.getString("name"));
                     song.setArtist(track.getString("artist"));
                     mSongsList.add(song);
-                    Log.d(TAG, "after mSongsList.add track");
                 }
-
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
+
         // display tracks of artist when searching for artist
         else if (result.startsWith(mehtod2)) {
+            // delete the extra info about the method used
             result = result.replaceFirst(mehtod2, "");
 
+            // retrieve the songs and cast from JSON to Song objects, then put in the arrayList
             try {
                 JSONObject trackStreamobj = new JSONObject(result);
                 JSONObject resultsObj = trackStreamobj.getJSONObject("toptracks");
@@ -90,18 +92,14 @@ public class TrackAsyncTask extends AsyncTask<String, Integer, String> {
                     JSONObject mArtist = track.getJSONObject("artist");
                     song.setArtist(mArtist.getString("name"));
                     mSongsList.add(song);
-                    Log.d(TAG, "after mSongsList.add artist");
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
         }
 
         // display results in SearchListActivity
-        Log.d(TAG, "before trackStartIntent");
         this.mSearchActivity.trackStartIntent(mSongsList);
-        Log.d(TAG, "after trackStartIntent");
     }
 
 }

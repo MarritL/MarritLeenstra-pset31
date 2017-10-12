@@ -9,9 +9,9 @@ import java.util.UUID;
  * Class that holds all the information about a song.
  */
 
-public class Song implements Serializable {
+class Song implements Serializable {
 
-
+    // declare variables of Song Class
     private UUID mId;
     private String mTitle;
     private String mArtist;
@@ -34,6 +34,7 @@ public class Song implements Serializable {
     }
 
 
+    // getters and setters for all fields
     public UUID getID() {
         return mId;
     }
